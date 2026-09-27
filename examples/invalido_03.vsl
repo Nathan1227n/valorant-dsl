@@ -1,0 +1,16 @@
+STRATEGY erroAcao {
+    ROUND 5
+    MAP Ascent
+    OBJECTIVE A
+
+    TEAM ATTACK {
+
+        PLAYERS {
+            PLAYER Nathan Jett
+        }
+
+        ACTIONS {
+            SMOKE A
+        }
+    }
+}

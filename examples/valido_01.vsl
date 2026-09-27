@@ -1,0 +1,21 @@
+STRATEGY ataqueA {
+    ROUND 5
+    MAP Ascent
+    OBJECTIVE A
+
+    TEAM ATTACK {
+
+        PLAYERS {
+            PLAYER Nathan Jett
+            PLAYER Joao Sova
+        }
+
+        ACTIONS {
+            USE Jett Dash AT A_Main
+            USE Sova Reveal AT A
+            POSITION A_Main
+            WAIT 5
+            PLANT A
+        }
+    }
+}

@@ -1,0 +1,21 @@
+STRATEGY entradaB {
+    ROUND 6
+    MAP Bind
+    OBJECTIVE B
+
+    TEAM ATTACK {
+
+        PLAYERS {
+            PLAYER Nathan Raze
+            PLAYER Joao Brimstone
+        }
+
+        ACTIONS {
+            USE Raze Satchel AT B_Main
+            USE Brimstone Smoke AT BSite
+            POSITION B_Main
+            WAIT 3
+            PLANT B
+        }
+    }
+}

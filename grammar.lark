@@ -1,0 +1,60 @@
+start: strategy
+
+strategy: _STRATEGY ID _LBRACE round map objective team _RBRACE
+
+round: _ROUND NUMBER
+
+map: _MAP ID
+
+objective: _OBJECTIVE ID
+
+team: _TEAM team_type _LBRACE players actions _RBRACE
+
+team_type: _ATTACK -> attack
+         | _DEFENSE -> defense
+
+players: _PLAYERS _LBRACE player+ _RBRACE
+
+player: _PLAYER ID ID
+
+actions: _ACTIONS _LBRACE action+ _RBRACE
+
+action: ability
+      | position
+      | wait
+      | plant
+
+ability: _USE ID ID _AT ID
+
+position: _POSITION ID
+
+wait: _WAIT NUMBER
+
+plant: _PLANT ID
+
+
+_STRATEGY: "STRATEGY"
+_ROUND: "ROUND"
+_MAP: "MAP"
+_OBJECTIVE: "OBJECTIVE"
+_TEAM: "TEAM"
+_ATTACK: "ATTACK"
+_DEFENSE: "DEFENSE"
+_PLAYERS: "PLAYERS"
+_PLAYER: "PLAYER"
+_ACTIONS: "ACTIONS"
+_USE: "USE"
+_AT: "AT"
+_POSITION: "POSITION"
+_PLANT: "PLANT"
+_WAIT: "WAIT"
+
+_LBRACE: "{"
+_RBRACE: "}"
+
+ID: /[a-zA-Z_][a-zA-Z0-9_]*/
+
+NUMBER: /[0-9]+/
+
+%import common.WS
+%ignore WS

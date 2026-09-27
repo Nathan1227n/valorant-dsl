@@ -1,0 +1,5 @@
+STRATEGY erroTeam {
+    ROUND 5
+    MAP Ascent
+    OBJECTIVE A
+}

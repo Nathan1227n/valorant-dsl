@@ -1,0 +1,17 @@
+STRATEGY esperaMid {
+    ROUND 3
+    MAP Haven
+    OBJECTIVE A
+
+    TEAM DEFENSE {
+
+        PLAYERS {
+            PLAYER Nathan Cypher
+        }
+
+        ACTIONS {
+            POSITION Mid
+            WAIT 10
+        }
+    }
+}

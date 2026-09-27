@@ -1,0 +1,19 @@
+STRATEGY defesaB {
+    ROUND 8
+    MAP Bind
+    OBJECTIVE B
+
+    TEAM DEFENSE {
+
+        PLAYERS {
+            PLAYER Nathan Killjoy
+            PLAYER Joao Omen
+        }
+
+        ACTIONS {
+            POSITION BSite
+            USE Omen Smoke AT BSite
+            WAIT 10
+        }
+    }
+}

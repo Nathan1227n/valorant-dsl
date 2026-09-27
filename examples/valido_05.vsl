@@ -1,0 +1,19 @@
+STRATEGY defesaA {
+    ROUND 10
+    MAP Ascent
+    OBJECTIVE A
+
+    TEAM DEFENSE {
+
+        PLAYERS {
+            PLAYER Nathan Killjoy
+            PLAYER Joao Omen
+        }
+
+        ACTIONS {
+            POSITION A_Main
+            USE Killjoy Turret AT A_Main
+            WAIT 10
+        }
+    }
+}
