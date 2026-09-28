@@ -492,6 +492,6 @@ Projeto desenvolvido como atividade acadêmica relacionada ao estudo de:
 
 # 👥 Autores
 
-**Nathan Maniçoba**
+**Nathan Maniçoba**,
 **Eduardo Oliveira**
 
