@@ -1,28 +1,76 @@
 from lark import Tree
 
+
+# ============================================================
+# HABILIDADES DOS AGENTES
+# ============================================================
+
 AGENT_ABILITIES = {
-    "Jett": {"Dash"},
+    "Jett": {"Dash", "Updraft"},
     "Sova": {"Reveal"},
     "Killjoy": {"Turret"},
-    "Omen": {"Smoke"},
+    "Omen": {"Smoke", "Ultimate"},
     "Raze": {"Satchel"},
     "Brimstone": {"Smoke"},
     "Sage": {"Wall"},
     "Phoenix": {"Flash"},
     "Breach": {"Flash"},
     "Cypher": {"Trap"},
-    "Omen": {"Ultimate"},
 }
+
+
+# ============================================================
+# LOCALIZAÇÕES VÁLIDAS
+# ============================================================
 
 LOCATIONS = {
     "A",
     "B",
+    "C",
     "A_Main",
     "B_Main",
     "BSite",
+    "A_Site",
+    "C_Site",
     "Mid",
+    "BoxMid"
 }
 
+
+# ============================================================
+# FUNÇÃO AUXILIAR
+# ============================================================
+
+def obter_valor(no):
+    """
+    Extrai o valor real de um nó da árvore sintática.
+
+    Exemplo:
+
+    Tree(
+        Token('RULE', 'agente'),
+        [Token('ID', 'Jett')]
+    )
+
+    retorna:
+
+    Jett
+    """
+
+    if isinstance(no, Tree):
+
+        if no.children:
+
+            return obter_valor(
+                no.children[0]
+            )
+
+    return str(no)
+
+
+# ============================================================
+# VERIFICAÇÃO SEMÂNTICA
+# ============================================================
 
 def verificar_semantica(arvore):
     """
@@ -33,21 +81,45 @@ def verificar_semantica(arvore):
 
     erros = []
 
+    # --------------------------------------------------------
+    # ESTRUTURA PRINCIPAL
+    # --------------------------------------------------------
+
     strategy = arvore.children[0]
 
     team_node = strategy.children[4]
 
     actions_node = team_node.children[2]
 
+    # --------------------------------------------------------
+    # VERIFICA AS AÇÕES
+    # --------------------------------------------------------
+
     for action_wrapper in actions_node.children:
 
         action = action_wrapper.children[0]
 
+        # ====================================================
+        # USE
+        # ====================================================
+
         if action.data == "ability":
 
-            agente = str(action.children[0])
-            habilidade = str(action.children[1])
-            local = str(action.children[2])
+            agente = obter_valor(
+                action.children[0]
+            )
+
+            habilidade = obter_valor(
+                action.children[1]
+            )
+
+            local = obter_valor(
+                action.children[2]
+            )
+
+            # ------------------------------------------------
+            # Verifica se o agente existe
+            # ------------------------------------------------
 
             if agente not in AGENT_ABILITIES:
 
@@ -57,6 +129,10 @@ def verificar_semantica(arvore):
 
                 continue
 
+            # ------------------------------------------------
+            # Verifica se o agente possui a habilidade
+            # ------------------------------------------------
+
             if habilidade not in AGENT_ABILITIES[agente]:
 
                 erros.append(
@@ -64,15 +140,25 @@ def verificar_semantica(arvore):
                     f"a habilidade '{habilidade}'."
                 )
 
+            # ------------------------------------------------
+            # Verifica se a localização existe
+            # ------------------------------------------------
+
             if local not in LOCATIONS:
 
                 erros.append(
                     f"'{local}' não é uma localização válida."
                 )
 
+        # ====================================================
+        # POSITION
+        # ====================================================
+
         elif action.data == "position":
 
-            local = str(action.children[0])
+            local = obter_valor(
+                action.children[0]
+            )
 
             if local not in LOCATIONS:
 
@@ -81,9 +167,15 @@ def verificar_semantica(arvore):
                     f"mas recebeu '{local}'."
                 )
 
+        # ====================================================
+        # PLANT
+        # ====================================================
+
         elif action.data == "plant":
 
-            local = str(action.children[0])
+            local = obter_valor(
+                action.children[0]
+            )
 
             if local not in LOCATIONS:
 
